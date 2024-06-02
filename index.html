@@ -21,13 +21,13 @@
             }
     
             .container {
-                max-width: 80%; /* Adjusted */
-                width: 80%; /* Adjusted */
-                margin: 40px; /* Adjusted */
+                max-width: 85%; /* Adjusted */
+                width: 700px; /* Adjusted */
+                margin: 20px; /* Adjusted */
                 background-color: #555555; /* Medium grey container */
                 border-radius: 20px;
                 box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
-                padding: 40px;
+                padding: 40px 70px; /* Adjusted */
                 text-align: center;
                 position: relative;
                 transition: opacity 1s ease; /* Smooth transition for opacity change */
@@ -80,27 +80,34 @@
             .arrow {
                 position: absolute;
                 top: 50%;
-                transform: translateY(-50%);
                 font-size: 26px; /* Adjusted */
                 cursor: pointer;
                 color: #FFFFFF; /* White arrow */
+                transition: transform 0.3s; /* Smooth transition for transform */
             }
     
             .prev {
-                left: 30px; /* Adjusted */
+                left: 20px; /* Adjusted */
+                transform: translate(-50%, -50%); /* Centering */
             }
     
             .next {
-                right: 30px; /* Adjusted */
+                right: 20px; /* Adjusted */
+                transform: translate(50%, -50%); /* Centering */
+            }
+    
+            .next:hover,
+            .prev:hover {
+                transform: scale(1.1); /* Scale up on hover */
             }
     
             .image-placeholder {
                 /* Add your image placeholders and backdrops styling here */
-                width: 100%;
+                width: calc(100% - 40px); /* Adjusted */
                 height: 220px; /* Adjusted */
                 background-color: #888888; /* Light grey backdrop */
                 border-radius: 10px;
-                margin-top: 30px; /* Adjusted */
+                margin: 30px auto; /* Adjusted */
             }
     
             footer {

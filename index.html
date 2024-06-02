@@ -3,80 +3,106 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Interactive Quiz Website</title>
+        <title>Aesthetic Interactive Quiz Website</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
         <style>
             body {
-            font-family: 'Times New Roman', Times, serif;
-            background-color: #c1d9cd; /* Sage green background */
-            color: #000000; /* Black text */
-            margin: 0;
-            padding: 0;
-        }
-
+                font-family: 'Roboto', sans-serif; /* User-friendly font */
+                background-color: #c1d9cd; /* Sage green background */
+                color: #000000; /* Black text */
+                margin: 0;
+                padding: 0;
+            }
+    
             header {
-            background-color: #ffffff; /* White header */
-            padding: 20px;
-            text-align: center;
-        }
-
+                background-color: #ffffff; /* White header */
+                padding: 20px;
+                text-align: center;
+            }
+    
             nav {
-            background-color: #ffffff; /* White navigation */
-            padding: 10px;
-            text-align: center;
-        }
-
+                background-color: #ffffff; /* White navigation */
+                padding: 10px;
+                text-align: center;
+            }
+    
             nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+            }
+    
             nav ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-
+                display: inline;
+                margin-right: 20px;
+            }
+    
             main {
-            padding: 20px;
-        }
-
-            section {
-            margin-bottom: 20px;
-        }
-
+                padding: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+    
+            .quiz-card {
+                background-color: #ffffff; /* White card background */
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                margin: 10px;
+                width: 300px;
+                text-align: center;
+                transition: transform 0.3s ease;
+            }
+    
+            .quiz-card:hover {
+                transform: translateY(-5px);
+            }
+    
             footer {
-            background-color: #ffffff; /* White footer */
-            padding: 20px;
-            text-align: center;
-        }
+                background-color: #ffffff; /* White footer */
+                padding: 20px;
+                text-align: center;
+            }
         </style>
     </head>
     <body>
         <header>
-        <h1>Welcome to Your Interactive Quiz!</h1>
+            <h1>Welcome to Your Aesthetic Interactive Quiz!</h1>
         </header>
-
+    
         <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Quiz</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Quiz</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
         </nav>
-
+    
         <main>
-        <section id="quiz-section">
-            <h2>Quiz Section</h2>
-            <!-- Add your animated quiz content and questions here -->
-        </section>
-
-        <section id="image-section">
-            <h2>Image Section</h2>
-            <!-- Add your image placeholders and backdrops here -->
-        </section>
+            <div class="quiz-card">
+                <!-- Add your animated quiz card content and questions here -->
+                <h2>Question 1</h2>
+                <p>Placeholder question</p>
+                <p>Placeholder answer choices</p>
+            </div>
+    
+            <div class="quiz-card">
+                <!-- Add your animated quiz card content and questions here -->
+                <h2>Question 2</h2>
+                <p>Placeholder question</p>
+                <p>Placeholder answer choices</p>
+            </div>
+    
+            <!-- Add more quiz cards as needed -->
+    
+            <div id="image-placeholder">
+                <!-- Add your image placeholders and backdrops here -->
+            </div>
         </main>
-
+    
         <footer>
             <p>&copy; 2024 Your Quiz Website. All rights reserved.</p>
         </footer>

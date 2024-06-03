@@ -83,7 +83,10 @@
                 font-size: 26px; /* Adjusted */
                 cursor: pointer;
                 color: #FFFFFF; /* White arrow */
-                transition: transform 0.3s; /* Smooth transition for transform */
+            }
+    
+            .arrow:hover {
+                color: #CCCCCC; /* Light grey arrow on hover */
             }
     
             .prev {
@@ -94,11 +97,6 @@
             .next {
                 right: 20px; /* Adjusted */
                 transform: translate(50%, -50%); /* Centering */
-            }
-    
-            .next:hover,
-            .prev:hover {
-                transform: scale(1.1); /* Scale up on hover */
             }
     
             .image-placeholder {

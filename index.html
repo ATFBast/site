@@ -1,293 +1,305 @@
 <DOCTYPE html>
-<html> 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Interactive Quiz</title>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-        <style>
-            body {
-                font-family: 'Roboto', sans-serif;
-                background-color: #333333; /* Dark grey background */
-                color: #FFFFFF; /* White text */
-                margin: 0;
-                padding: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                min-height: 100vh;
-                transition: background-color 1s ease; /* Smooth transition for background color change */
-            }
-    
-            .container {
-                max-width: 85%; /* Adjusted */
-                width: 700px; /* Adjusted */
-                margin: 20px; /* Adjusted */
-                background-color: #555555; /* Medium grey container */
-                border-radius: 20px;
-                box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
-                padding: 40px 70px; /* Adjusted */
-                text-align: center;
-                position: relative;
-                transition: opacity 1s ease; /* Smooth transition for opacity change */
-            }
-    
-            header {
-                font-size: 26px; /* Adjusted */
-                font-weight: 700;
-                margin-bottom: 30px; /* Adjusted */
-            }
-    
-            .quiz-card {
-                background-color: #666666; /* Dark grey card background */
-                border-radius: 10px;
-                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-                padding: 30px; /* Adjusted */
-                margin-bottom: 30px; /* Adjusted */
-                cursor: pointer;
-                perspective: 1000px;
-                height: 180px; /* Adjusted */
-                display: none;
-            }
-    
-            .quiz-card .front,
-            .quiz-card .back {
-                position: absolute;
-                width: calc(100% - 60px); /* Adjusted */
-                height: calc(100% - 60px); /* Adjusted */
-                backface-visibility: hidden;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-size: 22px; /* Adjusted */
-                color: #FFFFFF; /* White text */
-            }
-    
-            .quiz-card .back {
-                transform: rotateY(180deg);
-                background-color: #666666; /* Dark grey card background */
-            }
-    
-            .quiz-card.flipped .front {
-                transform: rotateY(-180deg);
-            }
-    
-            .quiz-card.flipped .back {
-                transform: rotateY(0deg);
-            }
-    
-            .arrow {
-                position: absolute;
-                top: 50%;
-                font-size: 26px; /* Adjusted */
-                cursor: pointer;
-                color: #FFFFFF; /* White arrow */
-            }
-    
-            .arrow:hover {
-                color: #CCCCCC; /* Light grey arrow on hover */
-            }
-    
-            .prev {
-                left: 20px; /* Adjusted */
-                transform: translate(-50%, -50%); /* Centering */
-            }
-    
-            .next {
-                right: 20px; /* Adjusted */
-                transform: translate(50%, -50%); /* Centering */
-            }
-    
-            .image-placeholder {
-                /* Add your image placeholders and backdrops styling here */
-                width: calc(100% - 40px); /* Adjusted */
-                height: 220px; /* Adjusted */
-                background-color: #888888; /* Light grey backdrop */
-                border-radius: 10px;
-                margin: 30px auto; /* Adjusted */
-            }
-    
-            footer {
-                font-size: 28px; /* Adjusted */
-                font-family: 'Pacifico', cursive;
-                margin-top: 30px; /* Adjusted */
-                opacity: 0;
-                transition: opacity 1s ease; /* Smooth transition for opacity change */
-            }
-    
-            .result-text {
-                display: none;
-                font-size: 22px; /* Adjusted */
-                margin-top: 30px; /* Adjusted */
-                color: #FFFFFF; /* White text */
-                z-index: 999;
-            }
-    
-            @media screen and (max-width: 768px) {
+    <html> 
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Interactive Quiz</title>
+            <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+            <style>
+                body {
+                    font-family: 'Roboto', sans-serif;
+                    background-color: #333333; /* Dark grey background */
+                    color: #FFFFFF; /* White text */
+                    margin: 0;
+                    padding: 0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    min-height: 100vh;
+                    transition: background-color 1s ease; /* Smooth transition for background color change */
+                }
+        
                 .container {
-                    width: 90%; /* Adjusted for smaller screens */
-                    padding: 20px; /* Adjusted for smaller screens */
+                    max-width: 85%; /* Adjusted */
+                    width: 700px; /* Adjusted */
+                    margin: 20px; /* Adjusted */
+                    background-color: #555555; /* Medium grey container */
+                    border-radius: 20px;
+                    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+                    padding: 40px 70px; /* Adjusted */
+                    text-align: center;
+                    position: relative;
+                    transition: opacity 1s ease; /* Smooth transition for opacity change */
                 }
-    
+        
                 header {
-                    font-size: 20px; /* Adjusted for smaller screens */
-                    margin-bottom: 20px; /* Adjusted for smaller screens */
+                    font-size: 26px; /* Adjusted */
+                    font-weight: 700;
+                    margin-bottom: 30px; /* Adjusted */
                 }
-    
+        
                 .quiz-card {
-                    padding: 20px; /* Adjusted for smaller screens */
-                    margin-bottom: 20px; /* Adjusted for smaller screens */
-                    height: 140px; /* Adjusted for smaller screens */
+                    background-color: #666666; /* Dark grey card background */
+                    border-radius: 10px;
+                    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+                    padding: 30px; /* Adjusted */
+                    margin-bottom: 30px; /* Adjusted */
+                    cursor: pointer;
+                    perspective: 1000px;
+                    height: 180px; /* Adjusted */
+                    display: none;
                 }
-    
+        
                 .quiz-card .front,
                 .quiz-card .back {
-                    font-size: 18px; /* Adjusted for smaller screens */
+                    position: absolute;
+                    width: calc(100% - 60px); /* Adjusted */
+                    height: calc(100% - 60px); /* Adjusted */
+                    backface-visibility: hidden;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 22px; /* Adjusted */
+                    color: #FFFFFF; /* White text */
                 }
-    
+        
+                .quiz-card .back {
+                    transform: rotateY(180deg);
+                    background-color: #666666; /* Dark grey card background */
+                }
+        
+                .quiz-card.flipped .front {
+                    transform: rotateY(-180deg);
+                }
+        
+                .quiz-card.flipped .back {
+                    transform: rotateY(0deg);
+                }
+        
                 .arrow {
-                    font-size: 20px; /* Adjusted for smaller screens */
+                    position: absolute;
+                    top: 50%;
+                    font-size: 26px; /* Adjusted */
+                    cursor: pointer;
+                    color: #FFFFFF; /* White arrow */
                 }
-    
-                .prev,
+        
+                .arrow:hover {
+                    color: #CCCCCC; /* Light grey arrow on hover */
+                }
+        
+                .prev {
+                    left: 20px; /* Adjusted */
+                    transform: translate(-50%, -50%); /* Centering */
+                }
+        
                 .next {
-                    left: 10px; /* Adjusted for smaller screens */
-                    right: 10px; /* Adjusted for smaller screens */
+                    right: 20px; /* Adjusted */
+                    transform: translate(50%, -50%); /* Centering */
                 }
-    
+        
                 .image-placeholder {
-                    height: 180px; /* Adjusted for smaller screens */
-                    margin: 20px auto; /* Adjusted for smaller screens */
+                    /* Add your image placeholders and backdrops styling here */
+                    width: 100%; /* Adjusted */
+                    max-width: 100%; /* Adjusted */
+                    height: auto; /* Adjusted */
+                    max-height: 220px; /* Adjusted */
+                    background-color: #888888; /* Light grey backdrop */
+                    border-radius: 10px;
+                    margin: 30px auto; /* Adjusted */
+                    overflow: hidden; /* Added */
+                    display: flex; /* Added */
+                    justify-content: center; /* Added */
+                    align-items: center; /* Adjusted */
                 }
-    
+
+                .image-placeholder img {
+                    width: auto; /* Adjusted */
+                    height: 100%; /* Adjusted */
+                    object-fit: cover; /* Added */
+                }
+        
                 footer {
-                    font-size: 24px; /* Adjusted for smaller screens */
-                    margin-top: 20px; /* Adjusted for smaller screens */
+                    font-size: 28px; /* Adjusted */
+                    font-family: 'Pacifico', cursive;
+                    margin-top: 30px; /* Adjusted */
+                    opacity: 0;
+                    transition: opacity 1s ease; /* Smooth transition for opacity change */
                 }
-    
+        
                 .result-text {
-                    font-size: 18px; /* Adjusted for smaller screens */
-                    margin-top: 20px; /* Adjusted for smaller screens */
+                    display: none;
+                    font-size: 22px; /* Adjusted */
+                    margin-top: 30px; /* Adjusted */
+                    color: #FFFFFF; /* White text */
+                    z-index: 999;
                 }
-            }
-    
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <header>Interactive Quiz</header>
-            <div class="quiz-card" onclick="flipCard(this)">
-                <div class="front">
-                    <p>Placeholder question 1</p>
-                </div>
-                <div class="back">
-                    <p>Placeholder answer 1</p>
-                </div>
-            </div>
-            <div class="quiz-card" onclick="flipCard(this)">
-                <div class="front">
-                    <p>Placeholder question 2</p>
-                </div>
-                <div class="back">
-                    <p>Placeholder answer 2</p>
-                </div>
-            </div>
-            <div class="quiz-card" onclick="flipCard(this)">
-                <div class="front">
-                    <p>Placeholder question 3</p>
-                </div>
-                <div class="back">
-                    <p>Placeholder answer 3</p>
-                </div>
-            </div>
-            <div class="quiz-card" onclick="flipCard(this)">
-                <div class="front">
-                    <p>Placeholder question 4</p>
-                </div>
-                <div class="back">
-                    <p>Placeholder answer 4</p>
-                </div>
-            </div>
-            <div class="quiz-card" onclick="flipCard(this)">
-                <div class="front">
-                    <p>Placeholder question 5</p>
-                </div>
-                <div class="back">
-                    <p>Placeholder answer 5</p>
-                </div>
-            </div>
-            <div class="quiz-card" onclick="flipCard(this)">
-                <div class="front">
-                    <p>Placeholder question 6</p>
-                </div>
-                <div class="back">
-                    <p>Placeholder answer 6</p>
-                </div>
-            </div>
-    
-            <div class="image-placeholder">
-                <!-- Add your image placeholders and backdrops here -->
-            </div>
-    
-            <div class="arrow prev" onclick="prevCard()">&#10094;</div>
-            <div class="arrow next" onclick="nextCard()">&#10095;</div>
-    
-            <p class="result-text">That's All Folks! How many did you get right?</p>
-        </div>
-    
-        <footer class="thats-all-folks">Thats all folks</footer>
-    
-        <script>
-            const container = document.querySelector('.container');
-            const cards = document.querySelectorAll('.quiz-card');
-            let currentCardIndex = 0;
-    
-            function flipCard(card) {
-                card.classList.toggle('flipped');
-            }
-    
-            function showCard(index) {
-                cards.forEach((card, i) => {
-                    if (i === index) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
+        
+                @media screen and (max-width: 768px) {
+                    .container {
+                        width: 90%; /* Adjusted for smaller screens */
+                        padding: 20px; /* Adjusted for smaller screens */
                     }
-                });
-            }
-    
-            function nextCard() {
-                currentCardIndex++;
-                if (currentCardIndex >= cards.length) {
-                    showResultText(); // Show result text when all cards are shown
+        
+                    header {
+                        font-size: 20px; /* Adjusted for smaller screens */
+                        margin-bottom: 20px; /* Adjusted for smaller screens */
+                    }
+        
+                    .quiz-card {
+                        padding: 20px; /* Adjusted for smaller screens */
+                        margin-bottom: 20px; /* Adjusted for smaller screens */
+                        height: 140px; /* Adjusted for smaller screens */
+                    }
+        
+                    .quiz-card .front,
+                    .quiz-card .back {
+                        font-size: 18px; /* Adjusted for smaller screens */
+                    }
+        
+                    .arrow {
+                        font-size: 20px; /* Adjusted for smaller screens */
+                    }
+        
+                    .prev,
+                    .next {
+                        left: 10px; /* Adjusted for smaller screens */
+                        right: 10px; /* Adjusted for smaller screens */
+                    }
+        
+                    .image-placeholder {
+                        height: 180px; /* Adjusted for smaller screens */
+                        margin: 20px auto; /* Adjusted for smaller screens */
+                    }
+        
+                    footer {
+                        font-size: 24px; /* Adjusted for smaller screens */
+                        margin-top: 20px; /* Adjusted for smaller screens */
+                    }
+        
+                    .result-text {
+                        font-size: 18px; /* Adjusted for smaller screens */
+                        margin-top: 20px; /* Adjusted for smaller screens */
+                    }
                 }
-                showCard(currentCardIndex);
-            }
-    
-            function prevCard() {
-                currentCardIndex--;
-                if (currentCardIndex < 0) {
-                    currentCardIndex = cards.length - 1;
+        
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <header>Interactive Quiz</header>
+                <div class="quiz-card" onclick="flipCard(this)">
+                    <div class="front">
+                        <p>What is social media censorship?</p>
+                    </div>
+                    <div class="back">
+                        <p>Social media censorship refers to the control or restriction of content shared on social media platforms by governments, companies, or other entities to comply with legal regulations, community guidelines, or internal policies.</p>
+                    </div>
+                </div>
+                <div class="quiz-card" onclick="flipCard(this)">
+                    <div class="front">
+                        <p>What are some common reasons for social media censorship?</p>
+                    </div>
+                    <div class="back">
+                        <p>Social media censorship can occur for various reasons, including preventing the spread of misinformation, hate speech, violence, protecting national security, enforcing community standards, and complying with legal regulations regarding content such as copyright infringement.</p>
+                    </div>
+                </div>
+                <div class="quiz-card" onclick="flipCard(this)">
+                    <div class="front">
+                        <p>How do social media platforms decide what content to censor?</p>
+                    </div>
+                    <div class="back">
+                        <p>Social media platforms use a combination of automated tools, human moderators, and community guidelines to decide what content to censor. Algorithms flag potentially violating content, which is then reviewed by human moderators who assess its compliance with platform policies.</p>
+                    </div>
+                </div>
+                <div class="quiz-card" onclick="flipCard(this)">
+                    <div class="front">
+                        <p>What are the implications of social media censorship on freedom of expression?</p>
+                    </div>
+                    <div class="back">
+                        <p>Social media censorship raises concerns about the potential infringement of individuals' rights to freedom of expression. While censorship aims to prevent harmful content, there is a risk of suppressing legitimate speech and dissenting opinions, leading to debates about the balance between censorship and free speech rights.</p>
+                    </div>
+                </div>
+                <div class="quiz-card" onclick="flipCard(this)">
+                    <div class="front">
+                        <p>How do governments influence social media censorship?</p>
+                    </div>
+                    <div class="back">
+                        <p>Governments can influence social media censorship through legal regulations, pressure on social media companies, and direct interventions such as content removal requests. Some governments implement censorship to suppress dissent, control information, or protect national interests, raising questions about the role of state censorship in democratic societies.</p>
+                    </div>
+                </div>
+                <div class="quiz-card" onclick="flipCard(this)">
+                    <div class="front">
+                        <p>What are the challenges in implementing effective social media censorship policies?</p>
+                    </div>
+                    <div class="back">
+                        <p>Implementing effective social media censorship policies faces challenges such as defining and identifying prohibited content, ensuring consistency and transparency in enforcement, balancing censorship with freedom of expression, addressing cross-border content, and navigating the complex legal and ethical considerations involved.</p>
+                    </div>
+                </div>
+        
+                <div class="image-placeholder">
+                    <img src="Internet_censorship_hero-1024x501.webp">
+                </div>
+        
+                <div class="arrow prev" onclick="prevCard()">&#10094;</div>
+                <div class="arrow next" onclick="nextCard()">&#10095;</div>
+        
+                <p class="result-text">That's All Folks! How many did you get right?</p>
+            </div>
+        
+            <footer class="thats-all-folks">Thats all folks</footer>
+        
+            <script>
+                const container = document.querySelector('.container');
+                const cards = document.querySelectorAll('.quiz-card');
+                let currentCardIndex = 0;
+        
+                function flipCard(card) {
+                    card.classList.toggle('flipped');
                 }
-                showCard(currentCardIndex);
-            }
-    
-            function showResultText() {
-                document.body.style.backgroundColor = "#000000"; // Change background to black
-                container.style.opacity = 0; // Fade out container
-                setTimeout(() => {
-                    container.style.display = 'none'; // Hide container after fading out
-                    document.querySelector('.result-text').style.display = 'block'; // Display result text
-                    document.querySelector('.thats-all-folks').style.display = 'block'; // Display "Thats All Folks" text
+        
+                function showCard(index) {
+                    cards.forEach((card, i) => {
+                        if (i === index) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                }
+        
+                function nextCard() {
+                    currentCardIndex++;
+                    if (currentCardIndex >= cards.length) {
+                        showResultText(); // Show result text when all cards are shown
+                    }
+                    showCard(currentCardIndex);
+                }
+        
+                function prevCard() {
+                    currentCardIndex--;
+                    if (currentCardIndex < 0) {
+                        currentCardIndex = cards.length - 1;
+                    }
+                    showCard(currentCardIndex);
+                }
+        
+                function showResultText() {
+                    document.body.style.backgroundColor = "#000000"; // Change background to black
+                    container.style.opacity = 0; // Fade out container
                     setTimeout(() => {
-                        document.querySelector('.result-text').style.opacity = '1'; // Fade in result text
-                        document.querySelector('.thats-all-folks').style.opacity = '1'; // Fade in "Thats All Folks" text
-                    }, 50); // Delay to ensure proper fading
-                }, 1000); // Adjust the delay based on the transition duration
-            }
-    
-            showCard(currentCardIndex);
-        </script>
-    </body>
-</html>
+                        container.style.display = 'none'; // Hide container after fading out
+                        document.querySelector('.result-text').style.display = 'block'; // Display result text
+                        document.querySelector('.thats-all-folks').style.display = 'block'; // Display "Thats All Folks" text
+                        setTimeout(() => {
+                            document.querySelector('.result-text').style.opacity = '1'; // Fade in result text
+                            document.querySelector('.thats-all-folks').style.opacity = '1'; // Fade in "Thats All Folks" text
+                        }, 50); // Delay to ensure proper fading
+                    }, 1000); // Adjust the delay based on the transition duration
+                }
+        
+                showCard(currentCardIndex);
+            </script>
+        </body>
+    </html>
